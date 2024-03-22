@@ -5,5 +5,5 @@ app_name = 'sales_app'
 
 urlpatterns = [
     # Home page
-    path('', views.index, name='index'),
+    path('', views.sales_homepage, name='sales_homepage'),
 ]
