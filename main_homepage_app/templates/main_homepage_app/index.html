@@ -1,2 +1,13 @@
-<p>C3 Main Homepage</p>
-<p>Welcome to the C3 website main homepage.</p>
+<!-- main_homepage_app/templates/main_homepage_app/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Homepage</title>
+</head>
+<body>
+    <h1>Welcome to the Main Homepage!</h1>
+    <!-- Link to the sales homepage -->
+    <a href="{% url 'sales_app:sales_homepage' %}">Go to Sales Homepage</a>
+</body>
+</html>
