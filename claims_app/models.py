@@ -8,6 +8,7 @@ class Claim(models.Model):
     claim_desc = models.CharField(max_length = 200)
     claim_date = models.DateField()
     claim_photo = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+    claim_status = models.IntegerField(default=0)
     repair_status = models.IntegerField()
     sale_id = models.ForeignKey(Sale, on_delete=models.CASCADE)
 

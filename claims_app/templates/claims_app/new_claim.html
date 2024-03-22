@@ -1,0 +1,9 @@
+{% extends "claims_app/base.html" %}
+{% block content %}     
+<p>Make a new claim:</p>   
+<form action="{% url 'claims_app:new_claim' %}" method='post'>
+    {% csrf_token %}     
+    {{ form.as_p }}     
+    <button name="submit">Submit claim</button>     
+</form>
+{% endblock content %}

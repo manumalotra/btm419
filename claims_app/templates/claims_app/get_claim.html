@@ -1,6 +1,9 @@
 {% extends 'claims_app/base.html' %}
 {% block content %}
-  <p>Claim: {{ claim.text }}</p>
-  <ul>Claim Details:</ul>
-  <p>{{ claim.claim_date|date:'M d, Y H:i' }}</p>
+  <p>Claim: {{ Claim.claim_id }}</p>
+  <ul>Claim Details:
+    <p>{{ Claim.claim_desc }}</p>
+    <p>{{ Claim.claim_date }}</p>
+    <p>{{ Claim.claim_photo }}</p>
+  </ul>
 {% endblock content %}
