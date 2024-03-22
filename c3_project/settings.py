@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # C3 Apps
     'sales_app',
+    'claims_app',
 
     'django.contrib.admin',
     'django.contrib.auth',
