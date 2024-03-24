@@ -4,6 +4,7 @@
   <ul>Claim Details:
     <p>{{ Claim.claim_desc }}</p>
     <p>{{ Claim.claim_date }}</p>
-    <p>{{ Claim.claim_photo }}</p>
+    <img src: "{{ Claim.claim_photo.url }}" alt: "Claim Photo">
+    <p>{{ Claim.claim_photo.url }}</p>
   </ul>
 {% endblock content %}
