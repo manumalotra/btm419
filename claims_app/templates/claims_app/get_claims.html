@@ -1,0 +1,14 @@
+{% extends "claims_app/base.html" %}
+{% block content %}
+<p>Here are all claims:</p>
+<ul>
+  {% for claim in Claims %}
+    <li>
+      <a href="{% url 'claims_app:get_claim' claim.claim_id %}">{{ claim }}</a>
+    </li>
+  {% empty %}
+    <li>No claims have been added yet.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'claims_app:new_claim' %}">Add a new claim</a>
+{% endblock content %}

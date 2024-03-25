@@ -1,0 +1,9 @@
+{% extends "claims_app/base.html" %}
+{% block content %}     
+<p>Make a new claim:</p>   
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Claim</button>
+</form>
+{% endblock content %}
