@@ -7,7 +7,7 @@ class Claim(models.Model):
     claim_type = models.IntegerField() # 1 for: Product Warranty Claim, 2 for: Extended Warranty Claim
     claim_desc = models.CharField(max_length = 200)
     claim_date = models.DateField()
-    claim_photo = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+    claim_photo = models.ImageField(upload_to='images/', height_field=None, width_field=None, max_length=100)
     claim_status = models.IntegerField(default=0) # 0 for: Under Review, 1 for: Denied, 2 for: Accepted
     repair_status = models.IntegerField() # 0 for: N/A, 1 for: Ready for Repair, 2 for: Repaired
     sale_id = models.ForeignKey(Sale, on_delete=models.CASCADE)

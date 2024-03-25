@@ -2,5 +2,6 @@
 
 {% block content %}
 <p>Need to make a claim?</p>
-<p>Use the form below to begin the claim process</p>
+<p>Use the button below to begin the claim process</p>
+<a href="{% url 'claims_app:new_claim' %}">Add a new claim</a>
 {% endblock content %}
