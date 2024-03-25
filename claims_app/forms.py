@@ -6,10 +6,9 @@ class ClaimForm(forms.ModelForm):
     CHOICES1 = (
             (1, 'Product Warranty Claim'),
             (2, 'Extended Warranty Claim'),
-            # Add more choices as needed
         )
         
-    claim_type = forms.ChoiceField(choices=CHOICES1, label='claim_type')
+    claim_type = forms.ChoiceField(choices=CHOICES1, label='Claim type')
 
     class Meta:
         model = Claim
