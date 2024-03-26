@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'sales_app',
     'claims_app',
     'users_app',
+    'users',
     'reporting_app',
 
     'django.contrib.admin',
