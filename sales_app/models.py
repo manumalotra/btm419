@@ -3,8 +3,9 @@ from django.db import models
 # Create your models here.
 
 class Sale(models.Model):
-    sale_id = models.IntegerField()
+    sale_id = models.AutoField(primary_key=True)
     sale_amount = models.DecimalField(max_digits=10, decimal_places = 2)
+    product_name = models.CharField(max_length=200)
     digital_signature = models.CharField(max_length=200)
 
     def __str__(self):
