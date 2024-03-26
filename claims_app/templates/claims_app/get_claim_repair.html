@@ -1,0 +1,31 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+<p>Claim Repair: {{ ClaimRepair.repair_id }}</p>
+  <ul>
+    <p>Date claim approved for repair: {{ ClaimRepair.claim_id.decision_date }}</p>
+    <p>Issue described in claim: {{ ClaimRepair.claim_id.claim_desc }}</p>
+    <p>Photo provided in claim:</p>
+    <img src="{{ ClaimRepair.claim_id.claim_photo.url }}" alt="Claim Photo">
+  </ul>
+{% if ClaimRepair.repair_status == 1 %}
+  <p><i>For Dealership</i></p>
+  <p>Claim Awaiting Repair</p>
+  <p>Repair Details Form:</p>   
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Close Repair Request</button>
+  </form>
+{% else %}
+  <p>This repair has been closed on {{ ClaimRepair.repair_date }}</p>
+  <p>Repair description: {{ ClaimRepair.repair_desc }}</p>
+  <p>Repair Result: 
+    {% if ClaimRepair.repair_status == 2 %}
+        Repaired
+    {% elif ClaimRepair.repair_status == 3 %}
+        Unable to be repaired
+    {% endif %}
+  </p>
+  <img src="{{ ClaimRepair.reapir_photo.url }}" alt="Repair Photo">
+{% endif %}
+{% endblock content %}

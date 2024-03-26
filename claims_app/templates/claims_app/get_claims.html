@@ -1,13 +1,42 @@
 {% extends 'main_homepage_app/base.html' %}
 {% block content %}
 <p>Here are all claims:</p>
+<p>Yet to be reviewed</p>
 <ul>
   {% for claim in Claims %}
+    {% if claim.claim_status == 0 %}
     <li>
       <a href="{% url 'claims_app:get_claim' claim.claim_id %}">{{ claim }}</a>
     </li>
+    {% endif %}
   {% empty %}
     <li>No claims have been added yet.</li>
+  {% endfor %}
+</ul>
+
+<p>Approved</p>
+<ul>
+  {% for claim in Claims %}
+    {% if claim.claim_status == 2 %}
+    <li>
+      <a href="{% url 'claims_app:get_claim' claim.claim_id %}">{{ claim }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>No claims have been approved yet.</li>
+  {% endfor %}
+</ul>
+
+<p>Denied</p>
+<ul>
+  {% for claim in Claims %}
+    {% if claim.claim_status == 1 %}
+    <li>
+      <a href="{% url 'claims_app:get_claim' claim.claim_id %}">{{ claim }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>No claims have been approved yet.</li>
   {% endfor %}
 </ul>
 <a href="{% url 'claims_app:new_claim' %}">Add a new claim</a>
