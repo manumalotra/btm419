@@ -38,3 +38,16 @@ def new_claim(request):
     else:
         form = ClaimForm()
     return render(request, 'claims_app/new_claim.html', {'form': form})
+    '''if request.method != 'POST':
+        # No data submitted; create a blank form.
+        form = ClaimForm()
+    else:
+        # POST data submitted; process data.
+        form = ClaimForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('claims_app:get_claims')
+
+    # Display a blank or invalid form.
+    context = {'form': form}
+    return render(request, 'claims_app/new_claim.html', context)'''

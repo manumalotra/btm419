@@ -1,4 +1,6 @@
 <!-- main_homepage_app/templates/main_homepage_app/index.html -->
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,3 +13,4 @@
     <a href="{% url 'sales_app:sales_homepage' %}">Go to Sales Homepage</a>
 </body>
 </html>
+{% endblock content %}

@@ -1,10 +1,9 @@
-{% extends 'claims_app/base.html' %}
+{% extends 'main_homepage_app/base.html' %}
 {% block content %}
-  <p>Claim: {{ Claim.claim_id }}</p>
+  <p>Claim: {{ claim.claim_id }}</p>
   <ul>Claim Details:
-    <p>{{ Claim.claim_desc }}</p>
-    <p>{{ Claim.claim_date }}</p>
-    <img src: "{{ Claim.claim_photo.url }}" alt: "Claim Photo">
-    <p>{{ Claim.claim_photo.url }}</p>
+    <p>{{ claim.claim_desc }}</p>
+    <p>{{ claim.claim_date }}</p>
+    <img src="{{ claim.claim_photo.url }}" alt="Claim Photo">
   </ul>
 {% endblock content %}

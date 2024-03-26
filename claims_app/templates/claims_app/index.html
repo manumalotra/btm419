@@ -1,6 +1,11 @@
-{% extends "claims_app/base.html" %}
+{% extends 'main_homepage_app/base.html' %}
 
 {% block content %}
+<h1>Welcome to the Claims Page!</h1>
 <p>Need to make a claim?</p>
-<p>Use the form below to begin the claim process</p>
+<p>Use the button below to begin the claim process</p>
+<a href="{% url 'claims_app:new_claim' %}">Add a new claim</a>
+<p>Find claims here:</p>
+<a href="{% url 'claims_app:get_claims'%}">
+    Find Claim</a>
 {% endblock content %}
