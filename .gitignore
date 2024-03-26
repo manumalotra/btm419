@@ -6,5 +6,8 @@ venv/
 env/
 c3_venv/
 
+# Ignore database.
+db.sqlite3
+
 # Ignore log files
 *.log
