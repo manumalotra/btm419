@@ -1,0 +1,43 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+<p>Here are all the claims approved for repair:</p>
+
+<p>Awaiting repair</p>
+<ul>
+  {% for repair in ClaimRepairs %}
+    {% if repair.repair_status == 1 %}
+    <li>
+      <a href="{% url 'claims_app:get_claim_repair' repair.repair_id %}">{{ repair }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>No claims are awaiting repair.</li>
+  {% endfor %}
+</ul>
+
+<p>Repaired</p>
+<ul>
+  {% for repair in ClaimRepairs %}
+    {% if repair.repair_status == 2 %}
+    <li>
+      <a href="{% url 'claims_app:get_claim_repair' repair.repair_id %}">{{ repair }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>No claims have been reapaired yet.</li>
+  {% endfor %}
+</ul>
+
+<p>Unable to Repair</p>
+<ul>
+  {% for repair in ClaimRepairs %}
+    {% if repair.repair_status == 3 %}
+    <li>
+      <a href="{% url 'claims_app:get_claim_repair' repair.repair_id %}">{{ repair }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>No claims have been reapaired yet.</li>
+  {% endfor %}
+</ul>
+{% endblock content %}
