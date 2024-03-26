@@ -1,9 +1,27 @@
 {% extends 'main_homepage_app/base.html' %}
 {% block content %}
-  <p>Claim: {{ claim.claim_id }}</p>
+<p>Claim: {{ Claim.claim_id }}</p>
   <ul>Claim Details:
-    <p>{{ claim.claim_desc }}</p>
-    <p>{{ claim.claim_date }}</p>
-    <img src="{{ claim.claim_photo.url }}" alt="Claim Photo">
+    <p>{{ Claim.claim_desc }}</p>
+    <p>{{ Claim.claim_date }}</p>
+    {% if Claim.claim_status == 0 %}
+      <p>Under Review</p>
+    {% elif Claim.claim_status == 1 %}
+      <p>Claim denied</p>
+    {% elif Claim.claim_status == 2 %}
+      <p>Claim Approved</p>
+    {% endif %}
+    <img src="{{ Claim.claim_photo.url }}" alt="Claim Photo">
   </ul>
+{% if Claim.claim_status == 0 %}
+<p><i>For staff</i></p>
+<p>Review Claim:</p>   
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Review</button>
+</form>
+{% else %}
+<p>This claim has been reviewed on {{ Claim.decision_date }}</p>
+{% endif %}
 {% endblock content %}
