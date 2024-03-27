@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports Homepage</title>
+</head>
+<body>
+    <header>
+        <h1>Reports Homepage</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'reports_app:sales_report' %}">Sales Report</a></li>
+            <li><a href="{% url 'reports_app:claims_report' %}">Claims Report</a></li>
+            <!-- Add more links for other reports as needed -->
+        </ul>
+    </nav>
+    <main>
+        <p>Welcome to the reports homepage. Click on a report to view details.</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 Your Company</p>
+    </footer>
+</body>
+</html>

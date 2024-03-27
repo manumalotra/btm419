@@ -28,6 +28,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('sales/', include('sales_app.urls')),
     path('logout/', auth_views.LogoutView.as_view(next_page='users:login'), name='logout'),
+    path('reports/', include('reports_app.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
