@@ -36,9 +36,7 @@ INSTALLED_APPS = [
     'main_homepage_app',
     'sales_app',
     'claims_app',
-    'users_app',
     'users',
-    'reports_app',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,7 +61,7 @@ ROOT_URLCONF = 'c3_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'reports_app', 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
