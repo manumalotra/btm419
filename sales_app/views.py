@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import SaleForm
 from .models import Sale
 
@@ -8,6 +9,7 @@ def sales_homepage(request):
     """The home page for Sales App."""
     return render(request, 'sales_app/sales_homepage.html')
 
+@login_required
 def add_sale(request):
     if request.method == 'POST':
         form = SaleForm(request.POST)
