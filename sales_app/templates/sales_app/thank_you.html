@@ -1,0 +1,17 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You For Your Purchase!</title>
+</head>
+<body>
+    <header>
+        <h1>Thank you for your purchase {{user}}!</h1>
+    </header>
+    <p>See your purchases below</p>
+    <a href="{% url 'sales_app:see_sales' %}">Here</a>
+</body>
+{% endblock content %}

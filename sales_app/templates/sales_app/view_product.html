@@ -1,0 +1,20 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+<p>Product no. {{ Product.product_id }}: {{ Product.product_name }}</p>
+<ul>
+    <p>Price: ${{ Product.product_price }}</p>
+    <p>{{ Product.product_desc }}</p>
+    {% if Product.product_type == 1 %}
+      <p>Regular Product</p>
+    {% elif Product.product_type == 2 %}
+      <p>Extended Warranty</p>
+    {% endif %}
+    {% if Product.product_photo %}
+      <p></p>
+      <img src="{{ Product.product_photo.url }}" alt="Product Photo">
+    {% endif %}
+</ul>
+<a href="{% url 'sales_app:add_sale' %}">Want to make a purchase? Click here!</a>
+<p><i>For employees</i></p>
+<p>Added by: {{ Product.employee }}</p>
+{% endblock content %}

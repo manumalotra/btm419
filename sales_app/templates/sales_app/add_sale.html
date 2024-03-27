@@ -1,4 +1,6 @@
 <!-- sales_app/templates/sales_app/add_sale.html -->
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +9,7 @@
     <title>Add Sale</title>
 </head>
 <body>
-    <h1>Add Sale</h1>
+    <h1>New Sale</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -15,3 +17,4 @@
     </form>
 </body>
 </html>
+{% endblock content %}    

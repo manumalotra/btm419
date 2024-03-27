@@ -5,11 +5,11 @@
 <p><i>For customers</i></p>
 <p>Need to make a claim?</p>
 {% if user.is_authenticated %}
-    <p>Use the button below to begin the claim process</p>
-    <a href="{% url 'claims_app:new_claim' %}">Add a new claim</a>
+    <p>Go to your previous sales to begin the claim process</p>
+    <a href="{% url 'sales_app:see_sales' %}">Sales History</a>
     <p><i>For C3 Staff</i></pi>
-    <p>Find claims here:</p>
-    <a href="{% url 'claims_app:get_claims'%}">Find Claim</a>
+    <p>Find your claims here:</p>
+    <a href="{% url 'claims_app:get_claims'%}">Check on a Previous Claim</a>
     <p><i>For dealerships</i></pi>
     <p><a href="{% url 'claims_app:get_claim_repairs'%}">Claims Approved for Repair</a></p>
 {% else %}
