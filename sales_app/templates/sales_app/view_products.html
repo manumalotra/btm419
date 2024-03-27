@@ -1,0 +1,32 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+<p><i>For customers</i></p>
+<p>Here are our products and warranties:</p>
+<p>Regular products</p>
+<ul>
+  {% for product in Products %}
+    {% if product.product_type == 1 %}
+    <li>
+      <a href="{% url 'sales_app:see_product' product.product_id %}">{{ product }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>There are no products yet.</li>
+  {% endfor %}
+</ul>
+<p>Extended Warranties</p>
+<ul>
+  {% for product in Products %}
+    {% if product.product_type == 2 %}
+    <li>
+      <a href="{% url 'sales_app:see_product' product.product_id %}">{{ product }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>There are no warranties yet.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'sales_app:add_sale' %}"> Purchase Something Here!</a>
+<p><i>For employees</i></p>
+<a href="{% url 'sales_app:add_product' %}">Add new products</a>
+{% endblock content %}

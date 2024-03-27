@@ -16,8 +16,15 @@
         <p>This is the Sales page of our website.</p>
 
         <!-- Add a link to the form page for adding sale data -->
-        <a href="{% url 'sales_app:add_sale' %}">Need to add a sale? Click here!</a>
-        <!-- Add more content as needed -->
+        <a href="{% url 'sales_app:add_sale' %}">Want to make a purchase? Click here!</a>
+        <p></p>
+        <a href="{% url 'sales_app:see_sales' %}">See previous purchases</a>
+        <p></p>
+        <a href="{% url 'sales_app:see_products' %}">Here are our avalible products</a>
+        <p><i>For employees</i></p>
+        <a href="{% url 'sales_app:add_product' %}">Add new products</a>
+        <p><i>For dealerships</i></p>
+        <a href="{% url 'sales_app:see_dealer_jobs' %}">Dealerships - Product Application Jobs</a>
     </main>
     <footer>
         <!-- Footer content -->

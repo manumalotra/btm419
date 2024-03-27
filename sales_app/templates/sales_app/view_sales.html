@@ -1,0 +1,58 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+<p><i>For customers</i></p>
+<p>Here are your previous orders:</p>
+<ul>
+<p>Regular Products</p>
+  {% for sale in Sales %}
+    {% if sale.product.product_type == 1 %}
+    <li>
+      <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>You haven't made any regular product purchases yet.</li>
+  {% endfor %}
+</ul>
+<ul>
+<p>Extended Warranties</p>
+  {% for sale in Sales %}
+    {% if sale.product.product_type == 2 %}
+    <li>
+      <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>You haven't made any extended warranty purchases yet.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'sales_app:add_sale' %}"> Make a new purchase</a>
+
+<p><i>For employees</i></p>
+<p>All Sales</p>
+<ul>
+  <p>Regular Products</p>
+  {% for sale in Sales %}
+    {% if sale.product.product_type == 1 %}
+    <li>
+      <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>There haven't been any regular product purchases yet.</li>
+  {% endfor %}
+</ul>
+<ul>
+<p>Extended Warranties</p>
+  {% for sale in Sales %}
+    {% if sale.product.product_type == 2 %}
+    <li>
+      <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>There haven't been any extended warranty purchases yet.</li>
+  {% endfor %}
+</ul>
+{% endblock content %}

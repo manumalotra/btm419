@@ -1,0 +1,24 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+<p>Sale: {{ Sale.sale_id }}</p>
+<ul>Sale Details:
+    <p>You Paid: ${{ Sale.product.product_price }}</p>
+    <p>Signature: {{ Sale.digital_signature }}</p>
+    <p>{{ Sale.sale_date }}</p>
+</ul>
+<p>Product Details:</p>
+<ul>
+    <p>Name: {{ Sale.product.product_name }}</p>
+    <p>Description: {{ Sale.product.product_desc }}</p>
+    {% if Sale.product.product_type == 1 %}
+      <p>Regular Product</p>
+    {% elif Sale.product.product_type == 2 %}
+      <p>Extended Warranty</p>
+    {% endif %}
+    {% if Sale.product.product_photo %}
+      <p></p>
+      <img src="{{ Sale.product.product_photo.url }}" alt="Product Photo">
+    {% endif %}
+</ul>
+<a href="{% url 'claims_app:new_claim' Sale.sale_id %}">Start a claim based on this sale</a>
+{% endblock content %}

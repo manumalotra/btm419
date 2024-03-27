@@ -1,0 +1,37 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+<p>Dealership Product Application #: {{ Job.job_id }}</p>
+  <ul>
+    <p>Product to be applied: {{ Job.sale.product.product_name }}</p>
+    <p>product description: {{ Job.sale.product.product_desc }}</p>
+    {% if Job.sale.product.product_photo %}
+      <p></p>
+      <img src="{{ Job.sale.product.product_photo.url }}" alt="Product Photo">
+    {% endif %}
+  </ul>
+{% if Job.job_status == 1 %}
+  <p><i>For Dealership</i></p>
+  <p>Job Awaiting Completion</p>
+  <p>Job Details Form:</p>   
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Close Job</button>
+  </form>
+{% else %}
+  <p>This job has been completed on {{ Job.job_date }} by {{ Job.job_staff }}</p>
+  <ul>
+    <p>Job description: {{ Job.job_desc }}</p>
+    <p>Job Result: 
+      {% if Job.job_status == 2 %}
+          Product Applied
+      {% elif Job.job_status == 3 %}
+          Unable to apply product
+      {% endif %}
+    </p>
+  </ul>
+  {% if Job.job_photo %}
+    <img src="{{ Job.job_photo.url }}" alt="Repair Photo">
+  {% endif %}
+{% endif %}
+{% endblock content %}

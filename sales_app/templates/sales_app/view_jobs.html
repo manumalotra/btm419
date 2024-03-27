@@ -1,0 +1,60 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+<p><i>For customers</i></p>
+<p>Here are all yours sales being applied by dealerships:</p>
+
+<p>Awaiting application</p>
+<ul>
+  {% for job in CustJobs %}
+    {% if job.job_status == 1 %}
+    <li>
+      <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>No products are awaiting application.</li>
+  {% endfor %}
+</ul>
+
+<p>Product applied</p>
+<ul>
+  {% for job in CustJobs %}
+    {% if job.job_status == 2 %}
+    <li>
+      <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>No sales have been applied.</li>
+  {% endfor %}
+</ul>
+
+<p><i>For employees and dealerships</i></p>
+<p>Here are all the jobs based on sales:</p>
+
+<p>Awaiting application</p>
+<ul>
+  {% for job in Jobs %}
+    {% if job.job_status == 1 %}
+    <li>
+      <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>No products are awaiting application.</li>
+  {% endfor %}
+</ul>
+
+<p>Product applied</p>
+<ul>
+  {% for job in Jobs %}
+    {% if job.job_status == 2 %}
+    <li>
+      <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }}</a>
+    </li>
+    {% endif %}
+  {% empty %}
+    <li>No sales have been applied.</li>
+  {% endfor %}
+</ul>
+{% endblock content %}
