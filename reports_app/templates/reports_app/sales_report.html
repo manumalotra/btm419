@@ -13,7 +13,10 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Amount</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Digital Signature</th>
+                <th>Product</th>
                 <!-- Add more table headers as needed -->
             </tr>
         </thead>
@@ -21,7 +24,10 @@
             {% for sale in sales_data %}
             <tr>
                 <td>{{ sale.sale_id }}</td>
-                <td>{{ sale.sale_amount }}</td>
+                <td>{{ sale.sale_date }}</td>
+                <td>{{ sale.customer }}</td>
+                <td>{{ sale.digital_signature}}</td>
+                <td>{{ sale.product}}</td>
                 <!-- Display other sale attributes -->
             </tr>
             {% endfor %}
