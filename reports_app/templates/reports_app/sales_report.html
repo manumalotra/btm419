@@ -1,0 +1,42 @@
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+
+<!-- sales_report.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+</head>
+<body>
+    <h1>Sales Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Digital Signature</th>
+                <th>Product</th>
+                <!-- Add more table headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales_data %}
+            <tr>
+                <td>{{ sale.sale_id }}</td>
+                <td>{{ sale.sale_date }}</td>
+                <td>{{ sale.customer }}</td>
+                <td>{{ sale.digital_signature}}</td>
+                <td>{{ sale.product}}</td>
+                <!-- Display other sale attributes -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+{% endblock content %}

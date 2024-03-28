@@ -1,1 +1,21 @@
-<p>Welcome to the main reports webpage.</p>
+{% extends 'main_homepage_app/base.html' %}
+{% block content %}
+
+<!-- reports_app/templates/reports_app/reports_homepage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reports Homepage</title>
+</head>
+<body>
+    <h1>Reports Homepage</h1>
+    <!-- Add content for reports homepage as needed -->
+    <ul>
+        <li><a href="{% url 'reports_app:sales_report' %}">Sales Report</a></li>
+        <!-- Add links to other reports or summaries -->
+    </ul>
+</body>
+</html>
+
+{% endblock content %}
