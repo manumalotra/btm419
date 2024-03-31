@@ -53,7 +53,6 @@ def see_products(request):
 
     return render(request, 'sales_app/view_products.html', context)
 
-@login_required
 def see_product(request, product_id):
     myproduct = Product.objects.get(pk=product_id)
     context = {'Product': myproduct}

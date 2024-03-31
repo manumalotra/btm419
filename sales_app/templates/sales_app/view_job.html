@@ -1,37 +1,124 @@
 {% extends 'main_homepage_app/base.html' %}
+{% load custom_filters %}
 {% block content %}
-<p>Dealership Product Application #: {{ Job.job_id }}</p>
-  <ul>
-    <p>Product to be applied: {{ Job.sale.product.product_name }}</p>
-    <p>product description: {{ Job.sale.product.product_desc }}</p>
-    {% if Job.sale.product.product_photo %}
-      <p></p>
-      <img src="{{ Job.sale.product.product_photo.url }}" alt="Product Photo">
-    {% endif %}
-  </ul>
-{% if Job.job_status == 1 %}
-  <p><i>For Dealership</i></p>
-  <p>Job Awaiting Completion</p>
-  <p>Job Details Form:</p>   
-  <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Close Job</button>
-  </form>
-{% else %}
-  <p>This job has been completed on {{ Job.job_date }} by {{ Job.job_staff }}</p>
-  <ul>
-    <p>Job description: {{ Job.job_desc }}</p>
-    <p>Job Result: 
-      {% if Job.job_status == 2 %}
-          Product Applied
-      {% elif Job.job_status == 3 %}
-          Unable to apply product
-      {% endif %}
-    </p>
-  </ul>
-  {% if Job.job_photo %}
-    <img src="{{ Job.job_photo.url }}" alt="Repair Photo">
-  {% endif %}
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dealership Job Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            padding-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dealership Job Summary</h1>
+        <h3>Product Application #{{ Job.job_id }} (Sale #{{ Job.sale.sale_id }})</h3>
+        <h3>Product to be applied: <a href="{% url 'sales_app:see_product' Job.sale.product.product_id %}">{{ Job.sale.product.product_name }}</a></h3>
+        <h3>Deadline: {{ Job.sale.sale_date|add_days:7 }}</h3>
+        {% if Job.job_status == 1 %}
+            <p>Job Awaiting Completion</p>  
+            <p><i>For Dealership</i></p>
+            <h2>Job Details Form</h2>   
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Close Job</button>
+            </form>
+        {% else %}
+        <ul>
+            <li>This job has been completed on {{ Job.job_date }} by {{ Job.job_staff }}</li>
+            <li>Job description: {{ Job.job_desc }}</li>
+            <li>Job Result: 
+                {% if Job.job_status == 2 %}
+                    Product Applied
+                {% elif Job.job_status == 3 %}
+                    Unable to apply product
+                {% endif %}
+            </li>
+        
+        {% if Job.job_photo %}
+            <li><p>Repair Photo:</p>
+            <img src="{{ Job.job_photo.url }}" alt="Repair Photo"></li>
+        </ul>
+        {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
 {% endblock content %}

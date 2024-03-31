@@ -1,11 +1,11 @@
-{% extends 'main_homepage_app/base.html' %}
+{% extends "main_homepage_app/base.html" %}
+
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You For Your Purchase!</title>
+    <title>Logout</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,22 +21,23 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        header {
-            color: #000000;
-            padding: 20px;
-            text-align: center;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
-        h1 {
-            font-size: 28px;
-            margin-top: 0;
-        }
         p {
             font-size: 16px;
+            margin-bottom: 30px;
+            color: #666;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
             margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         a {
             color: #007bff;
@@ -50,11 +51,12 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Thank you for choosing C3, {{ user }}!</h1>
-            <p>Your purchase has been processed</p>
-        </header>
-        <p><a href="{% url 'sales_app:see_sales' %}">See your purchase here</a></p>
+        <p>You have been logged out. Thank you for visiting!</p>
+        <ul>
+            <li><a href="{% url 'main_homepage_app:index'%}">Home</a></li>
+            <li><a href="{% url 'users:login' %}">Log in</a></li>
+        </ul>
     </div>
 </body>
+</html>
 {% endblock content %}

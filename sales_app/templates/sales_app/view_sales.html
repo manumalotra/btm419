@@ -1,58 +1,130 @@
 {% extends 'main_homepage_app/base.html' %}
 {% block content %}
-<p><i>For customers</i></p>
-<p>Here are your previous orders:</p>
-<ul>
-<p>Regular Products</p>
-  {% for sale in Sales %}
-    {% if sale.product.product_type == 1 %}
-    <li>
-      <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
-    </li>
-    {% endif %}
-  {% empty %}
-    <li>You haven't made any regular product purchases yet.</li>
-  {% endfor %}
-</ul>
-<ul>
-<p>Extended Warranties</p>
-  {% for sale in Sales %}
-    {% if sale.product.product_type == 2 %}
-    <li>
-      <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
-    </li>
-    {% endif %}
-  {% empty %}
-    <li>You haven't made any extended warranty purchases yet.</li>
-  {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sale Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            margin-right: 20px;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            padding-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+        h3, h4 {
+            color: #333;
+            margin-top: 20px;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <p><i>For customers - filter sales by user</i></p>
+        <h1>Purchase History</h1>
+        <h3>Here are all of your previous purchases with us:</h3>
+        <div>
+            <h4>Regular Products</h4>
+            <ul>
+                {% for sale in Sales %}
+                    {% if sale.product.product_type == 1 %}
+                        <li>
+                            <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
+                        </li>
+                    {% endif %}
+                {% empty %}
+                    <li>You haven't made any regular product purchases yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <h4>Extended Warranties</h4>
+            <ul>
+                {% for sale in Sales %}
+                    {% if sale.product.product_type == 2 %}
+                        <li>
+                            <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
+                        </li>
+                    {% endif %}
+                {% empty %}
+                    <li>You haven't made any extended warranty purchases yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-<a href="{% url 'sales_app:add_sale' %}"> Make a new purchase</a>
+        <h3><a href="{% url 'sales_app:add_sale' %}">Make a new purchase</a></h3>
 
-<p><i>For employees</i></p>
-<p>All Sales</p>
-<ul>
-  <p>Regular Products</p>
-  {% for sale in Sales %}
-    {% if sale.product.product_type == 1 %}
-    <li>
-      <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
-    </li>
-    {% endif %}
-  {% empty %}
-    <li>There haven't been any regular product purchases yet.</li>
-  {% endfor %}
-</ul>
-<ul>
-<p>Extended Warranties</p>
-  {% for sale in Sales %}
-    {% if sale.product.product_type == 2 %}
-    <li>
-      <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
-    </li>
-    {% endif %}
-  {% empty %}
-    <li>There haven't been any extended warranty purchases yet.</li>
-  {% endfor %}
-</ul>
+        <p><i>For employees</i></p>
+        <h1>All Sales</h1>
+        <div>
+            <h4>Regular Products</h4>
+            <ul>
+                {% for sale in AllSales %}
+                    {% if sale.product.product_type == 1 %}
+                        <li>
+                            <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
+                        </li>
+                    {% endif %}
+                {% empty %}
+                    <li>There haven't been any regular product purchases yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <h4>Extended Warranties</h4>
+            <ul>
+                {% for sale in AllSales %}
+                    {% if sale.product.product_type == 2 %}
+                        <li>
+                            <a href="{% url 'sales_app:see_sale' sale.sale_id %}">{{ sale }}</a>
+                        </li>
+                    {% endif %}
+                {% empty %}
+                    <li>There haven't been any extended warranty purchases yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
 {% endblock content %}
