@@ -1,18 +1,90 @@
 {% extends 'main_homepage_app/base.html' %}
 
 {% block content %}
-<h1>Welcome to the Claims Page!</h1>
-<p><i>For customers</i></p>
-<p>Need to make a claim?</p>
-{% if user.is_authenticated %}
-    <p>Go to your previous sales to begin the claim process</p>
-    <a href="{% url 'sales_app:see_sales' %}">Sales History</a>
-    <p><i>For C3 Staff</i></pi>
-    <p>Find your claims here:</p>
-    <a href="{% url 'claims_app:get_claims'%}">Check on a Previous Claim</a>
-    <p><i>For dealerships</i></pi>
-    <p><a href="{% url 'claims_app:get_claim_repairs'%}">Claims Approved for Repair</a></p>
-{% else %}
-    <a class="nav-link" href="{% url 'users:login' %}">Please log in to make a claim</a>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Claims Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            margin-right: 20px;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            padding-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+        h3 {
+            margin: 5px;
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            margin-top: 10px;
+            line-height: 1.6;
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Claims Page!</h1>
+        <p><i>For customers</i></p>
+        <h2>Need to make a claim?</h2>
+        {% if user.is_authenticated %}
+            <p>Go to your previous sales to begin the claim process</p>
+            <ul>
+                <li><h3><a href="{% url 'sales_app:see_sales' %}">Purchase History</a></h3></li>
+            </ul>
+            <p>Find your claims here:</p>
+            <ul>
+                <li><h3><a href="{% url 'claims_app:get_claims'%}">Check on a Previous Claim</a></h3></li>
+            </ul>
+            <p>View the repair status for approved claims:</p>
+            <ul>
+                <li><h3><a href="{% url 'claims_app:get_claim_repairs'%}">Claims Approved for Repair</a></h3></li>
+            </ul>
+            <p><i>For dealerships</i></p>
+            <h3><a href="{% url 'claims_app:get_claim_repairs'%}">Claims Approved for Repair</a></h3>
+            <p>View all claim repair jobs</p>
+        {% else %}
+            <a href="{% url 'users:login' %}">Please log in to make a claim</a>
+        {% endif %}
+    </div>
+</body>
+</html>
 {% endblock content %}

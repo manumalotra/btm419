@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'sales_app',
     'claims_app',
     'users',
+    'reports_app',
 
     'django.contrib.admin',
     'django.contrib.auth',
