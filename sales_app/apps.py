@@ -4,3 +4,6 @@ from django.apps import AppConfig
 class SalesAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'sales_app'
+
+    def ready(self):
+        import sales_app.signals 

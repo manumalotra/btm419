@@ -1,0 +1,103 @@
+<!-- sales_app/templates/sales_app/index.html -->
+{% extends 'main_homepage_app/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to C3 Sales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            margin-right: 20px;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 36px;
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            font-size: 24px;
+            color: #007bff;
+            margin-top: 30px;
+        }
+        h3 {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        p {
+            margin-top: 10px;
+            line-height: 1.6;
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p><i>For customers</i></p>
+        <h1>Welcome to C3 Sales</h1>
+        {% if user.is_authenticated %}
+            <div class="cta">
+                <h3><a href="{% url 'sales_app:add_sale' %}">Click Here to Make a Purchase!</a></h3>
+            </div>
+            <h2><p><a href="{% url 'sales_app:see_sales' %}">Purchase History</a></p></h2>
+            <p>View all your previous purchases with C3</p>
+            <h2><p><a href="{% url 'sales_app:see_products' %}">Products List</a></p></h2>
+            <p>View all of our products and warranties!</p>
+            <h2><p><a href="{% url 'sales_app:see_dealer_jobs' %}">Vehicle Product Application</a></p></h2>
+            <p>View the status of any products being applied to your vehicle by our partnered dealerships</p>
+            <p><i>For employees</i></p>
+            <h1>Employee Sales Portal</h1>
+            <h2><p><a href="{% url 'sales_app:add_product' %}">Add New Product</a></p></h2>
+            <h2><p><a href="{% url 'sales_app:see_products' %}">See All Products</a></p></h2>
+            <h2><p><a href="{% url 'sales_app:see_sales' %}">See All Sales</a></p></h2>
+            <h2><p><a href="{% url 'sales_app:see_dealer_jobs' %}">Product Application Status</a></p></h2>
+            <p><i>For dealerships</i></p>
+            <h1>Dealership Job Portal</h1>
+            <h2><p><a href="{% url 'sales_app:see_dealer_jobs' %}">C3 Product Application Jobs</a></p></h2>
+        {% else %}
+            <a class="nav-link" href="{% url 'users:login' %}">Please log in</a>
+        {% endif %}
+        
+    </div>
+</body>
+</html>
+{% endblock content %}

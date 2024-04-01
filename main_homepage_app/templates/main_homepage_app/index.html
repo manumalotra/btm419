@@ -1,0 +1,101 @@
+<!-- main_homepage_app/templates/main_homepage_app/index.html -->
+{% extends 'main_homepage_app/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            margin-right: 20px;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 36px;
+            color: #333;
+            text-align: center;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        p {
+            margin-top: 10px;
+            line-height: 1.6;
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Main Homepage!</h1>
+        <!-- Link to the sales homepage -->
+        <h3 class="cta"><a href="{% url 'sales_app:sales_homepage' %}">Sales Homepage</a></h3>
+        <h3 class="cta"><a href="{% url 'claims_app:index' %}">Claims Homepage</a></h3>
+        {% if user.is_authenticated %}
+            <p><i>For employees</i></p>
+            <h3><a href="{% url 'reports_app:reports_home'%}">Reporting Homepage</a></h3>
+        {% else %}
+            <h3><a href="{% url 'users:register'%}">New Customer? Make an Account Here!</a></h3>
+            <p>A user account is required to make purchases with C3</p>
+        {% endif %}
+        
+        <h2>Here are C3's available products and extended warranties:</h2>
+        <h4>Regular products</h4>
+        <ul>
+            {% for product in Products %}
+                {% if product.product_type == 1 %}
+                    <li>
+                        <a href="{% url 'sales_app:see_product' product.product_id %}">{{ product }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>There are no products yet.</li>
+            {% endfor %}
+        </ul>
+        <h4>Extended Warranties</h4>
+        <ul>
+            {% for product in Products %}
+                {% if product.product_type == 2 %}
+                    <li>
+                        <a href="{% url 'sales_app:see_product' product.product_id %}">{{ product }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>There are no warranties yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+{% endblock content %}

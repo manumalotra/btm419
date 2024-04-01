@@ -1,0 +1,152 @@
+{% extends 'main_homepage_app/base.html' %}
+{% load custom_filters %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dealership Product Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            margin-right: 20px;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 36px;
+            color: #333;
+            text-align: center;
+        } 
+        h2, h3, h4 {
+            margin-top: 20px;
+            color: #333;
+        }
+        p {
+            margin-top: 10px;
+            line-height: 1.6;
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Approved Claim Repairs</h1>
+        <p><i>For customers - filter visible repairs by user</i></p>
+        <h2>Here are your claims being repaired by dealerships:</h2>
+
+        <h4>Awaiting Repair</h4>
+        <ul>
+            {% for repair in CustRepairs %}
+                {% if repair.repair_status == 1 %}
+                    <li>
+                        <a href="{% url 'claims_app:get_claim_repair' repair.repair_id %}">{{ repair }} - Deadline: {{ repair.claim_id.decision_date|add_days:7 }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No claims are awaiting repair.</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Repaired</h4>
+        <ul>
+            {% for repair in CustRepairs %}
+                {% if repair.repair_status == 2 %}
+                    <li>
+                        <a href="{% url 'claims_app:get_claim_repair' repair.repair_id %}">{{ repair }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No claims have been repaired yet.</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Unable to Repair</h4>
+        <ul>
+            {% for repair in CustRepairs %}
+                {% if repair.repair_status == 3 %}
+                    <li>
+                        <a href="{% url 'claims_app:get_claim_repair' repair.repair_id %}">{{ repair }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No approved claims have failed to have been repaired.</li>
+            {% endfor %}
+        </ul>
+
+        <p><i>For employees and dealerships</i></p>
+        <h2>Dealership Repair Jobs</h2>
+        <p>Repairs are to be complete no later than a week following the claim approval date!</p>
+
+        <h4>Awaiting Repair</h4>
+        <ul>
+            {% for repair in ClaimRepairs %}
+                {% if repair.repair_status == 1 %}
+                    <li>
+                        <a href="{% url 'claims_app:get_claim_repair' repair.repair_id %}">{{ repair }} - Deadline: {{ repair.claim_id.decision_date|add_days:7 }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No claims are awaiting repair.</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Repaired</h4>
+        <ul>
+            {% for repair in ClaimRepairs %}
+                {% if repair.repair_status == 2 %}
+                    <li>
+                        <a href="{% url 'claims_app:get_claim_repair' repair.repair_id %}">{{ repair }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No claims have been repaired yet.</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Unable to Repair</h4>
+        <ul>
+            {% for repair in ClaimRepairs %}
+                {% if repair.repair_status == 3 %}
+                    <li>
+                        <a href="{% url 'claims_app:get_claim_repair' repair.repair_id %}">{{ repair }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No approved claims have failed to have been repaired.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+{% endblock content %}

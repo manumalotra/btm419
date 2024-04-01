@@ -1,0 +1,140 @@
+{% extends 'main_homepage_app/base.html' %}
+{% load custom_filters %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Claim Repair Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            padding-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+        h3 {
+            color: #333;
+            margin-top: 10px;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Claim Repair Details</h1>
+        <h3>Claim Repair: {{ ClaimRepair.repair_id }}</h3>
+        <ul>
+            {% if ClaimRepair.repair_status == 1 %}
+            <li>Claim awaiting repair</li>
+            <li>Date claim approved for repair: {{ ClaimRepair.claim_id.decision_date }}</li>
+            <li>Repair deadline: Deadline: {{ ClaimRepair.claim_id.decision_date|add_days:7 }}</li>
+            {% else %}
+            <li>Repair closed on {{ ClaimRepair.repair_date }}</li>
+            {% endif %}
+            <li>Issue described in claim: {{ ClaimRepair.claim_id.claim_desc }}</li>
+            {% if ClaimRepair.claim_id.claim_photo %}
+            <li>Photo provided in claim:
+                <img src="{{ ClaimRepair.claim_id.claim_photo.url }}" alt="Claim Photo">
+            </li>
+            {% endif %}
+        </ul>
+        {% if ClaimRepair.repair_status == 1 %}
+            <p><i>For Dealership</i></p>
+            <p>Repair Details Form:</p>   
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Close Repair Request</button>
+            </form>
+        {% else %}
+            <p>This repair has been closed on {{ ClaimRepair.repair_date }} by {{ ClaimRepair.repair_staff }}</p>
+            <ul>
+                <li>Repair description: {{ ClaimRepair.repair_desc }}</li>
+                <li>Repair Result: 
+                    {% if ClaimRepair.repair_status == 2 %}
+                        Repaired
+                    {% elif ClaimRepair.repair_status == 3 %}
+                        Unable to be repaired
+                    {% endif %}
+                </li>
+            </ul>
+            {% if ClaimRepair.repair_photo %}
+                <img src="{{ ClaimRepair.repair_photo.url }}" alt="Repair Photo">
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock content %}
+

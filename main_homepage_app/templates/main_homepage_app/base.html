@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C3 Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .top-banner {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 30px;
+        }
+        .top-banner a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s ease;
+        }
+        .top-banner p {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s ease;
+        }
+        .top-banner a:hover {
+            color: #f8f9fa;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-links p {
+            margin: 0;
+        }
+        .nav-links form {
+            margin-left: 10px;
+        }
+        .nav-links button {
+            background-color: #28a745;
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-banner">
+        <div class="nav-links">
+            <p>
+                <a href="{% url 'main_homepage_app:index'%}">Home</a>
+                <a href="{% url 'sales_app:sales_homepage'%}">Sales</a>
+                <a href="{% url 'claims_app:index'%}">Claims</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'reports_app:reports_home'%}">Reporting</a>
+                {% endif %}
+            </p>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="nav-links">
+                <p>Hello, {{ user.username }}</p>
+                <form action="{% url 'users:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="nav-links">
+                <p><a href="{% url 'users:register' %}">Register</a> <a href="{% url 'users:login' %}">Log in</a></p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+{% block content %} to be overridden
+{% endblock content %}
+
+<!--This banner was created in coordination with chat gpt. Here is the link to the chat: -->

@@ -1,0 +1,154 @@
+{% extends 'main_homepage_app/base.html' %}
+{% load custom_filters %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dealership Product Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            margin-right: 20px;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 36px;
+            color: #333;
+            text-align: center;
+        } 
+        h2, h3, h4 {
+            margin-top: 20px;
+            color: #333;
+        }
+        p {
+            margin-top: 10px;
+            line-height: 1.6;
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vehicle Product Application</h1>
+        <p><i>For customers - filter visible jobs by user</i></p>
+        <h2>Here are all your purchases being applied by dealerships:</h2>
+
+        <h4>Awaiting Application</h4>
+        <ul>
+            {% for job in CustJobs %}
+                {% if job.job_status == 1 %}
+                    <li>
+                        <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }} - Deadline: {{ job.sale.sale_date|add_days:7 }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>You have no purchases awaiting application</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Product Applied</h4>
+        <ul>
+            {% for job in CustJobs %}
+                {% if job.job_status == 2 %}
+                    <li>
+                        <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>None of your purchases have been applied</li>
+            {% endfor %}
+        </ul>
+
+       
+        <h4>Product Unable to be Applied</h4>
+        <ul>
+            {% for job in CustJobs %}
+                {% if job.job_status == 3 %}
+                    <li>
+                        <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No sales were failed to be applied</li>
+            {% endfor %}
+        </ul>
+
+        <p><i>For employees and dealerships</i></p>
+        <h2>Dealership Product Application Jobs</h2>
+        <p>Jobs are to be complete no later than a week following the sale!</p>
+
+        <h4>Awaiting Application</h4>
+        <ul>
+            {% for job in Jobs %}
+                {% if job.job_status == 1 %}
+                    <li>
+                        <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }} - Deadline: {{ job.sale.sale_date|add_days:7 }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No purchases are awaiting application</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Product Applied</h4>
+        <ul>
+            {% for job in Jobs %}
+                {% if job.job_status == 2 %}
+                    <li>
+                        <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No purchases have been applied</li>
+            {% endfor %}
+        </ul>
+
+       
+        <h4>Product Unable to be Applied</h4>
+        <ul>
+            {% for job in Jobs %}
+                {% if job.job_status == 3 %}
+                    <li>
+                        <a href="{% url 'sales_app:see_dealer_job' job.job_id %}">{{ job }}</a>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>No sales were failed to be applied</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+{% endblock content %}
