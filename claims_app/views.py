@@ -47,7 +47,8 @@ def new_claim(request, sale_id):
     if request.method == 'POST':
         form = ClaimForm(request.POST, request.FILES)
         if form.is_valid():
-            instance = form.save(commit=False)  
+            instance = form.save(commit=False) 
+            instance.claim_type = mysale.product.product_type
             instance.claim_date = date.today()
             instance.claim_status = 0
             instance.sale_id = mysale

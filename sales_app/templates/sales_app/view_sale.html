@@ -1,24 +1,89 @@
 {% extends 'main_homepage_app/base.html' %}
 {% block content %}
-<p>Sale: {{ Sale.sale_id }}</p>
-<ul>Sale Details:
-    <p>You Paid: ${{ Sale.product.product_price }}</p>
-    <p>Signature: {{ Sale.digital_signature }}</p>
-    <p>{{ Sale.sale_date }}</p>
-</ul>
-<p>Product Details:</p>
-<ul>
-    <p>Name: {{ Sale.product.product_name }}</p>
-    <p>Description: {{ Sale.product.product_desc }}</p>
-    {% if Sale.product.product_type == 1 %}
-      <p>Regular Product</p>
-    {% elif Sale.product.product_type == 2 %}
-      <p>Extended Warranty</p>
-    {% endif %}
-    {% if Sale.product.product_photo %}
-      <p></p>
-      <img src="{{ Sale.product.product_photo.url }}" alt="Product Photo">
-    {% endif %}
-</ul>
-<a href="{% url 'claims_app:new_claim' Sale.sale_id %}">Start a claim based on this sale</a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sale Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            padding-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+        h3 {
+            color: #333;
+
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sale Details</h1>
+        <h3>Sale #{{ Sale.sale_id }}</h3>
+        <ul>
+            <li>Price: ${{ Sale.product.product_price }}</li>
+            <li>Purchaser: {{ Sale.customer }}</li>
+            <li>Signature: {{ Sale.digital_signature }}</li>
+            <li>Sale date: {{ Sale.sale_date }}</li>
+        </ul>
+        <h3>Product Details:</h3>
+        <ul>
+            <li>Product name: {{ Sale.product.product_name }}</li>
+            <li>Description: {{ Sale.product.product_desc }}</li>
+            {% if Sale.product.product_type == 1 %}
+                <li>Product Type: Regular Product</li>
+            {% elif Sale.product.product_type == 2 %}
+                <li>Product Type: Extended Warranty</li>
+            {% endif %}
+            {% if Sale.product.product_photo %}
+                <li><img src="{{ Sale.product.product_photo.url }}" alt="Product Photo"></li>
+            {% endif %}
+        </ul>
+        <h3><a href="{% url 'claims_app:new_claim' Sale.sale_id %}">Start a claim based on this sale</a></h3>
+    </div>
+</body>
+</html>
 {% endblock content %}

@@ -15,7 +15,7 @@ class Product(models.Model):
     employee = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Product Name: {self.product_name}, Price: ${self.product_price}"
+        return f"#{self.product_id}: {self.product_name} - ${self.product_price}"
 
 class Sale(models.Model):
     sale_id = models.AutoField(primary_key=True)
@@ -25,7 +25,7 @@ class Sale(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Sale ID: {self.sale_id}, Product: {self.product.product_name}, Purchase Price: {self.product.product_price}, Digital Signature: {self.digital_signature}"
+        return f"Sale #{self.sale_id} - Product: {self.product.product_name} @ ${self.product.product_price}. Purchased by {self.customer}"
     
 class DealerJob(models.Model):
     job_id = models.AutoField(primary_key=True)

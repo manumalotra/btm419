@@ -6,12 +6,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You For Your Purchase!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            color: #000000;
+            padding: 20px;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+        h1 {
+            font-size: 28px;
+            margin-top: 0;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Thank you for your purchase {{user}}!</h1>
-    </header>
-    <p>See your purchases below</p>
-    <a href="{% url 'sales_app:see_sales' %}">Here</a>
+    <div class="container">
+        <header>
+            <h1>Thank you for choosing C3, {{ user }}!</h1>
+            <p>Your purchase has been processed</p>
+        </header>
+        <p><a href="{% url 'sales_app:see_sales' %}">See your purchase here</a></p>
+    </div>
 </body>
 {% endblock content %}

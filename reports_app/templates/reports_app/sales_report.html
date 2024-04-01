@@ -1,41 +1,96 @@
 {% extends 'main_homepage_app/base.html' %}
 {% block content %}
 
-<!-- sales_report.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {     
+            margin: 20px auto;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            padding-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+        tr:hover {
+        background-color: #f0f0f0;
+        cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Sales Report</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Customer</th>
-                <th>Digital Signature</th>
-                <th>Product</th>
-                <!-- Add more table headers as needed -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for sale in sales_data %}
-            <tr>
-                <td>{{ sale.sale_id }}</td>
-                <td>{{ sale.sale_date }}</td>
-                <td>{{ sale.customer }}</td>
-                <td>{{ sale.digital_signature}}</td>
-                <td>{{ sale.product}}</td>
-                <!-- Display other sale attributes -->
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Sales Report</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sale ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Digital Signature</th>
+                    <th>Product</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sale in sales_data %}
+                <tr class='clickable-row' data-href="{% url 'sales_app:see_sale' sale.sale_id %}">
+                    <td>{{ sale.sale_id }}</td>
+                    <td>{{ sale.sale_date }}</td>
+                    <td>{{ sale.customer }}</td>
+                    <td>{{ sale.digital_signature}}</td>
+                    <td>{{ sale.product}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var rows = document.querySelectorAll(".clickable-row");
+            rows.forEach(function(row) {
+                row.addEventListener("click", function() {
+                    window.location.href = row.getAttribute("data-href");
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 

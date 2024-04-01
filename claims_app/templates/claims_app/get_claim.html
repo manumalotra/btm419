@@ -1,31 +1,129 @@
 {% extends 'main_homepage_app/base.html' %}
 {% block content %}
-<p>Claim: {{ Claim.claim_id }}</p>
-  <ul>Claim Details:
-    <p>{{ Claim.claim_desc }}</p>
-    <p>{{ Claim.claim_date }}</p>
-    {% if Claim.claim_status == 0 %}
-      <p>Under Review</p>
-    {% elif Claim.claim_status == 1 %}
-      <p>Claim denied</p>
-    {% elif Claim.claim_status == 2 %}
-      <p>Claim Approved</p>
-    {% endif %}
-    {% if Claim.claim_photo %}
-      <img src="{{ Claim.claim_photo.url }}" alt="Claim Photo">
-    {% endif %}
-  </ul>
-{% if Claim.claim_status == 0 %}
-<p><i>For staff</i></p>
-<p>Review Claim:</p>   
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit Review</button>
-</form>
-{% else %}
-<p></p>
-<p><i>For employees</i></p>
-<p>This claim has been reviewed on {{ Claim.decision_date }} by {{ Claim.deciding_staff }}</p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Claim Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            padding-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+        h3 {
+            color: #333;
+            
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Claim Details</h1>
+        <h3>Claim #{{ Claim.claim_id }}</h3>
+        <ul><p>Claim Details:</p>
+            <li>Description of issue: {{ Claim.claim_desc }}</li>
+            <li>Claim date: {{ Claim.claim_date }}</li>
+            {% if Claim.claim_status == 0 %}
+                <li>Under Review</li>
+            {% elif Claim.claim_status == 1 %}
+                <li>Claim denied</li>
+            {% elif Claim.claim_status == 2 %}
+                <li>Claim Approved</li>
+            {% endif %}
+            {% if Claim.claim_photo %}
+                <img src="{{ Claim.claim_photo.url }}" alt="Claim Photo">
+            {% endif %}
+        </ul>
+        {% if Claim.claim_status == 0 %}
+            <p><i>For employees</i></p>   
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit Review</button>
+            </form>
+        {% else %}
+            <p></p>
+            <p><i>For employees</i></p>
+            <p>This claim has been reviewed on {{ Claim.decision_date }} by {{ Claim.deciding_staff }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
 {% endblock content %}

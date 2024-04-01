@@ -1,20 +1,69 @@
 {% extends 'main_homepage_app/base.html' %}
 {% block content %}
 
-<!-- reports_app/templates/reports_app/reports_homepage.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Reports Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            padding-bottom: 10px;
+            color: #333;
+            text-align: center;
+            
+        }
+        h3 {
+            margin: 5px;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Reports Homepage</h1>
-    <!-- Add content for reports homepage as needed -->
-    <ul>
-        <li><a href="{% url 'reports_app:sales_report' %}">Sales Report</a></li>
-        <!-- Add links to other reports or summaries -->
-    </ul>
+    <div class="container">
+        <h1>Reports Homepage</h1>
+        <h2>Welcome C3 staff! Choose a report type below:</h2>
+        <ul>
+            <li><h3><a href="{% url 'reports_app:sales_report' %}">Sales Report</a></h3></li>
+            <!-- Add links to other reports or summaries -->
+        </ul>
+    </div>
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 
 def register(request):
@@ -21,3 +21,7 @@ def register(request):
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'registration/register.html', context)
+
+def log_out(request):
+    logout(request)
+    return redirect('index')
